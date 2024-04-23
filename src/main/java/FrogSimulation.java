@@ -14,27 +14,27 @@ public class FrogSimulation
 	//implementation is below, but not important
 	
 	public boolean simulate(){ 
-		boolean decision = false;
-		int position = 0;
+		int distance = 0;
+		int hops = 0;
 
-		for (int i = 0; i < maxHops; i++){
-			position += this.hopDistance();
+		while (hops < maxHops){
+			distance += hopDistance();
+			hops++;
+
+			if (distance < 0){
+				return false;
+			} else if (distance >= goalDistance){
+				return true;
+			}
 		}
-
-		if (position >= goalDistance){
-			decision = true;
-		} else {
-			decision = false;
-		}
-
-		return decision;
+		return false;
 	}
 	
 	public double runSimulations(int num){ 
 		int good = 0;
 
 		for (int i = 0; i < num; i++){
-			if (this.simulate() == true){
+			if (simulate() == true){
 				good++;
 			}
 		}
